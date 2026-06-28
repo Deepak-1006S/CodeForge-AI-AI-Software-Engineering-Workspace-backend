@@ -10,8 +10,8 @@ import { SocketProvider } from './context/SocketContext';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 // Auth pages
-import { LoginPage } from './pages/auth/LoginPage';
-import { RegisterPage } from './pages/auth/RegisterPage';
+import { PremiumLoginPage } from './pages/auth/PremiumLoginPage';
+import { PremiumRegisterPage } from './pages/auth/PremiumRegisterPage';
 import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/auth/ResetPasswordPage';
 import { SocialCallbackPage } from './pages/auth/SocialCallbackPage';
@@ -51,8 +51,8 @@ const App: React.FC = () => {
 
                   {/* Public Auth Routes */}
                   <Route element={<AuthLayout />}>
-                    <Route path="/auth/login" element={<LoginPage />} />
-                    <Route path="/auth/register" element={<RegisterPage />} />
+                    <Route path="/auth/login" element={<PremiumLoginPage />} />
+                    <Route path="/auth/register" element={<PremiumRegisterPage />} />
                     <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="/auth/reset-password/:token" element={<ResetPasswordPage />} />
                     <Route path="/auth/social-callback" element={<SocialCallbackPage />} />

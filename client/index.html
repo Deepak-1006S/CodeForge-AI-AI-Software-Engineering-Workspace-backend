@@ -1,14 +1,1440 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="CodeForge AI — AI-Powered Software Engineering Workspace" />
-    <title>CodeForge AI</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CodeForge AI — Sign in</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & BASE ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --void:       #05070D;
+  --surface:    #0A0E1A;
+  --panel:      #0D1117;
+  --card-bg:    rgba(13,17,23,0.72);
+  --border:     rgba(255,255,255,0.07);
+  --border-md:  rgba(255,255,255,0.12);
+  --border-hi:  rgba(59,130,246,0.45);
+  --blue:       #3B82F6;
+  --blue-glow:  rgba(59,130,246,0.18);
+  --violet:     #8B5CF6;
+  --violet-dim: rgba(139,92,246,0.15);
+  --mint:       #34D399;
+  --slate:      #475569;
+  --muted:      #64748B;
+  --sub:        #94A3B8;
+  --text:       #CBD5E1;
+  --bright:     #E2E8F0;
+  --white:      #F1F5F9;
+  --red:        #EF4444;
+  --amber:      #F59E0B;
+  --green:      #22C55E;
+  --radius-sm:  6px;
+  --radius:     10px;
+  --radius-lg:  16px;
+  --radius-xl:  22px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--void);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ─── LAYOUT ────────────────────────────────────────────────────────── */
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  height: 100vh;
+  position: relative;
+}
+
+/* ─── LEFT PANEL ────────────────────────────────────────────────────── */
+.left-panel {
+  position: relative;
+  background: var(--surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  border-right: 1px solid var(--border);
+}
+
+/* Deep space background */
+.left-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 15%, rgba(59,130,246,0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 40% at 80% 85%, rgba(139,92,246,0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 30% at 60% 40%, rgba(52,211,153,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle grid overlay */
+.left-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* ── Logo ── */
+.panel-logo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+.logo-bracket { color: var(--blue); }
+.logo-slash   { color: var(--violet); opacity: 0.8; }
+
+/* ── Center content ── */
+.panel-center {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.panel-headline {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.panel-headline .hl-blue   { color: var(--blue); }
+.panel-headline .hl-violet { color: var(--violet); }
+
+.panel-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 380px;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Live code window ── */
+.code-window {
+  background: rgba(9,13,22,0.88);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 0 1px rgba(59,130,246,0.05),
+    0 24px 48px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  max-width: 540px;
+}
+
+.code-titlebar {
+  background: rgba(13,17,23,0.95);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.traffic-lights { display: flex; gap: 5px; }
+.tl {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.tl-r  { background: rgba(239,68,68,0.7); }
+.tl-y  { background: rgba(245,158,11,0.7); }
+.tl-g  { background: rgba(34,197,94,0.7); }
+
+.code-file {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 6px;
+}
+
+.code-branch {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--violet);
+  background: rgba(139,92,246,0.1);
+  border: 1px solid rgba(139,92,246,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.code-body {
+  padding: 16px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.75;
+  min-height: 240px;
+}
+
+.cl {
+  display: flex;
+  align-items: baseline;
+  padding: 0 20px 0 0;
+  transition: background 0.15s;
+}
+.cl:hover { background: rgba(255,255,255,0.02); }
+.cl.added   { background: rgba(34,197,94,0.06); }
+.cl.removed { background: rgba(239,68,68,0.06); text-decoration: line-through; opacity: 0.5; }
+.cl.active  { background: rgba(59,130,246,0.05); }
+
+.ln {
+  min-width: 36px;
+  text-align: right;
+  color: rgba(100,116,139,0.4);
+  font-size: 10px;
+  padding-right: 16px;
+  user-select: none;
+}
+
+.cl.added   .ln::before { content: '+'; color: rgba(34,197,94,0.6); margin-right: 2px; }
+.cl.removed .ln::before { content: '-'; color: rgba(239,68,68,0.5); margin-right: 2px; }
+
+/* Syntax tokens */
+.k  { color: #C678DD; }   /* keyword */
+.fn { color: #61AFEF; }   /* function */
+.s  { color: #98C379; }   /* string */
+.n  { color: #D19A66; }   /* number/const */
+.t  { color: #E5C07B; }   /* type */
+.c  { color: #5C6370; font-style: italic; } /* comment */
+.o  { color: #ABB2BF; }   /* operator/default */
+.vi { color: #8B5CF6; }   /* violet accent */
+.mt { color: #34D399; }   /* mint accent */
+
+/* Blinking cursor */
+.cursor-inline {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: var(--blue);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: cursor-blink 1s step-end infinite;
+  border-radius: 1px;
+}
+@keyframes cursor-blink { 50% { opacity: 0; } }
+
+/* Code status bar */
+.code-statusbar {
+  background: rgba(59,130,246,0.06);
+  border-top: 1px solid var(--border);
+  padding: 5px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.status-item { display: flex; align-items: center; gap: 5px; }
+.status-dot  { width: 6px; height: 6px; border-radius: 50%; }
+
+/* ── Feature pills ── */
+.panel-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sub);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  padding: 5px 11px;
+  border-radius: 100px;
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.pill:hover { border-color: var(--border-md); color: var(--bright); }
+.pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── RIGHT PANEL ───────────────────────────────────────────────────── */
+.right-panel {
+  position: relative;
+  background: var(--void);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+}
+
+/* Ambient glow behind card */
+.right-panel::before {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.06) 40%, transparent 75%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ── Glass card ── */
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2.25rem 2rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 32px 64px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  animation: card-in 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Card top sheen */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 30%, rgba(59,130,246,0.3) 50%, rgba(255,255,255,0.12) 70%, transparent);
+  border-radius: 1px;
+}
+
+/* ── Card header ── */
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.2) 100%);
+  border: 1px solid rgba(139,92,246,0.25);
+  margin-bottom: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── Tab switcher ── */
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+  margin-bottom: 1.75rem;
+}
+
+.tab-btn {
+  padding: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  letter-spacing: -0.01em;
+}
+.tab-btn.active {
+  background: var(--panel);
+  color: var(--white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.tab-btn:not(.active):hover { color: var(--sub); }
+
+/* ── OAuth buttons ── */
+.oauth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1.2rem;
+}
+
+.oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bright);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, transform 0.12s;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.oauth-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-1px);
+}
+.oauth-btn:active { transform: scale(0.98); }
+
+.oauth-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 1.2rem 0;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.divider-text {
+  font-size: 11px;
+  color: var(--slate);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* ── Floating label inputs ── */
+.field {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.field-input {
+  width: 100%;
+  height: 50px;
+  padding: 16px 14px 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  caret-color: var(--blue);
+}
+.field-input::placeholder { color: transparent; }
+
+.field-input:focus {
+  border-color: var(--border-hi);
+  background: rgba(59,130,246,0.04);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+
+.field-input:focus + .field-label,
+.field-input:not(:placeholder-shown) + .field-label {
+  transform: translateY(-9px) scale(0.8);
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.field-label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--muted);
+  pointer-events: none;
+  transform-origin: left center;
+  transition: transform 0.18s ease, color 0.18s ease, font-size 0.18s ease;
+  white-space: nowrap;
+}
+
+/* Password toggle */
+.field-action {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+.field-action:hover { color: var(--sub); }
+
+/* Field icon */
+.field-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  transition: color 0.2s;
+}
+.field-input:focus ~ .field-icon { color: var(--blue); }
+
+.has-icon .field-input  { padding-left: 38px; }
+.has-icon .field-label  { left: 38px; }
+
+/* ── Row: Remember + Forgot ── */
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+  margin-top: -0.25rem;
+}
+
+/* Custom checkbox */
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--muted);
+  user-select: none;
+}
+.check-label:hover { color: var(--sub); }
+
+.check-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-md);
+  background: rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.check-input { display: none; }
+.check-input:checked + .check-box {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.check-input:checked + .check-box::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+  display: block;
+}
+
+.forgot-link {
+  font-size: 13px;
+  color: var(--blue);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s;
+}
+.forgot-link:hover { opacity: 0.75; }
+
+/* ── Primary CTA ── */
+.btn-cta {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: -0.01em;
+  transition: opacity 0.2s, transform 0.15s;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.15) inset,
+    0 8px 24px rgba(59,130,246,0.28);
+}
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+  pointer-events: none;
+}
+.btn-cta:hover  { opacity: 0.92; transform: translateY(-1px); }
+.btn-cta:active { transform: scale(0.98); }
+
+/* Loading spinner */
+.btn-cta.loading .btn-text { opacity: 0; }
+.btn-cta.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Footer link ── */
+.card-footer-text {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+.card-footer-text a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.card-footer-text a:hover { opacity: 0.75; }
+
+/* ── Terms ── */
+.terms-text {
+  text-align: center;
+  margin-top: 0.85rem;
+  font-size: 11px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+.terms-text a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+.terms-text a:hover { color: var(--sub); }
+
+/* ── Error / Success states ── */
+.field-error {
+  font-size: 11.5px;
+  color: var(--red);
+  margin-top: 5px;
+  margin-left: 2px;
+  display: none;
+  animation: fade-in 0.2s ease;
+}
+.field.has-error .field-input {
+  border-color: rgba(239,68,68,0.5);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
+}
+.field.has-error .field-error { display: block; }
+.field.has-error .field-label { color: var(--red); }
+.field.has-error .field-input:focus + .field-label { color: var(--red); }
+
+@keyframes fade-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ── Toast notification ── */
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-80px);
+  background: var(--panel);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius-lg);
+  padding: 10px 18px;
+  font-size: 13px;
+  color: var(--bright);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+.toast.visible { transform: translateX(-50%) translateY(0); }
+.toast-icon { font-size: 14px; }
+
+/* ── Role selector ── */
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.role-opt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.role-opt:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--border-md);
+}
+.role-opt.selected {
+  background: rgba(59,130,246,0.08);
+  border-color: rgba(59,130,246,0.35);
+}
+.role-opt input { display: none; }
+
+.role-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+.role-name {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.role-opt.selected .role-name { color: var(--blue); }
+
+/* ── Strength meter ── */
+.strength-meter {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  margin-bottom: -4px;
+}
+.strength-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+.strength-bar.weak   { background: var(--red); }
+.strength-bar.medium { background: var(--amber); }
+.strength-bar.strong { background: var(--green); }
+
+/* ── Form sections ── */
+.form-section { display: none; }
+.form-section.active { display: block; }
+
+/* ── Animations ── */
+.anim-in {
+  animation: anim-in 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes anim-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+/* ─── RESPONSIVE ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  html, body { overflow: auto; }
+  .auth-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  .left-panel {
+    display: none;
+  }
+  .right-panel {
+    min-height: 100vh;
+    padding: 2.5rem 1.25rem;
+  }
+  .auth-card {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-card { padding: 2rem 1.5rem 1.75rem; }
+  .oauth-row { grid-template-columns: 1fr; }
+}
+
+/* ── Focus accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Toast ───────────────────────────────────────────────── -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <span class="toast-icon">✓</span>
+  <span id="toast-msg">Signed in successfully</span>
+</div>
+
+<!-- ── Layout ──────────────────────────────────────────────── -->
+<div class="auth-layout">
+
+  <!-- ══ LEFT PANEL ═══════════════════════════════════════════ -->
+  <div class="left-panel" aria-hidden="true">
+
+    <!-- Logo -->
+    <div class="panel-logo">
+      <div class="logo-mark">⬡</div>
+      <span><span class="logo-bracket">[</span>CodeForge<span class="logo-slash">/</span>AI<span class="logo-bracket">]</span></span>
+    </div>
+
+    <!-- Center -->
+    <div class="panel-center">
+      <p style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--violet);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.8rem;">AI Engineering Workspace</p>
+      <h2 class="panel-headline">
+        Build faster<br/>with <span class="hl-blue">AI</span> at the<br/><span class="hl-violet">core</span>
+      </h2>
+      <p class="panel-sub">Kanban boards, real-time collaboration, GitHub insights, and a Gemini AI assistant — all in one workspace built for engineering teams.</p>
+
+      <!-- Live code window -->
+      <div class="code-window">
+        <div class="code-titlebar">
+          <div class="traffic-lights">
+            <div class="tl tl-r"></div>
+            <div class="tl tl-y"></div>
+            <div class="tl tl-g"></div>
+          </div>
+          <span class="code-file">src/services/gemini.ts</span>
+          <span class="code-branch">⑂ feat/ai-sprint</span>
+        </div>
+        <div class="code-body" id="code-stream">
+          <!-- JS fills this -->
+        </div>
+        <div class="code-statusbar">
+          <div class="status-item">
+            <div class="status-dot" style="background:var(--green);"></div>
+            TypeScript
+          </div>
+          <div class="status-item">
+            <div class="status-dot" style="background:var(--violet);"></div>
+            Gemini 1.5 Pro
+          </div>
+          <div class="status-item" style="margin-left:auto;">
+            <div class="status-dot" style="background:var(--blue); animation: pulse-dot 2s ease infinite;"></div>
+            AI active
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pills -->
+    <div class="panel-pills">
+      <div class="pill">
+        <div class="pill-dot" style="background:var(--blue);"></div>
+        Kanban boards
+      </div>
+      <div class="pill">
+        <div class="pill-dot" style="background:var(--violet);"></div>
+        Gemini AI
+      </div>
+      <div class="pill">
+        <div class="pill-dot" style="background:var(--mint);"></div>
+        Real-time
+      </div>
+      <div class="pill">
+        <div class="pill-dot" style="background:var(--amber);"></div>
+        GitHub sync
+      </div>
+      <div class="pill">
+        <div class="pill-dot" style="background:var(--sub);"></div>
+        Role-based access
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT PANEL ════════════════════════════════════════════ -->
+  <div class="right-panel">
+    <div class="auth-card" role="main">
+
+      <!-- Card header -->
+      <div class="card-header">
+        <div class="card-logo">⬡</div>
+        <h1 class="card-title" id="card-title">Welcome back</h1>
+        <p class="card-sub" id="card-sub">Sign in to your workspace</p>
+      </div>
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" id="tab-signin" onclick="switchTab('signin')">Sign in</button>
+        <button class="tab-btn" role="tab" aria-selected="false" id="tab-signup" onclick="switchTab('signup')">Create account</button>
+      </div>
+
+      <!-- ── SIGN IN FORM ── -->
+      <div class="form-section active anim-in" id="section-signin">
+
+        <!-- OAuth -->
+        <div class="oauth-row">
+          <button class="oauth-btn" onclick="handleOAuth('Google')" aria-label="Continue with Google">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Google
+          </button>
+          <button class="oauth-btn" onclick="handleOAuth('GitHub')" aria-label="Continue with GitHub">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            GitHub
+          </button>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or continue with email</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <form id="signin-form" novalidate onsubmit="handleSignin(event)">
+          <!-- Email -->
+          <div class="field has-icon" id="field-email">
+            <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <input class="field-input" type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required aria-describedby="email-error"/>
+            <label class="field-label" for="email">Email address</label>
+            <div class="field-error" id="email-error" role="alert">Enter a valid email address</div>
+          </div>
+
+          <!-- Password -->
+          <div class="field has-icon" id="field-password">
+            <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input class="field-input" type="password" id="password" name="password" placeholder="Password" autocomplete="current-password" required aria-describedby="password-error"/>
+            <label class="field-label" for="password">Password</label>
+            <button type="button" class="field-action" onclick="togglePwd('password', this)" aria-label="Toggle password visibility">
+              <svg id="eye-signin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+            <div class="field-error" id="password-error" role="alert">Password is required</div>
+          </div>
+
+          <!-- Remember / Forgot -->
+          <div class="auth-row">
+            <label class="check-label">
+              <input type="checkbox" class="check-input" id="remember"/>
+              <div class="check-box"></div>
+              Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-cta" id="signin-btn">
+            <span class="btn-text">Sign in to workspace</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- ── SIGN UP FORM ── -->
+      <div class="form-section anim-in" id="section-signup">
+        <!-- OAuth -->
+        <div class="oauth-row">
+          <button class="oauth-btn" onclick="handleOAuth('Google')" aria-label="Sign up with Google">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="none">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Google
+          </button>
+          <button class="oauth-btn" onclick="handleOAuth('GitHub')" aria-label="Sign up with GitHub">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            GitHub
+          </button>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or sign up with email</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- Role selector -->
+        <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:8px;">Select your role</p>
+        <div class="role-selector" role="radiogroup" aria-label="Select role">
+          <label class="role-opt selected" onclick="selectRole(this)">
+            <input type="radio" name="role" value="admin" checked/>
+            <div class="role-icon">🛡️</div>
+            <div class="role-name">Admin</div>
+          </label>
+          <label class="role-opt" onclick="selectRole(this)">
+            <input type="radio" name="role" value="manager"/>
+            <div class="role-icon">📋</div>
+            <div class="role-name">Manager</div>
+          </label>
+          <label class="role-opt" onclick="selectRole(this)">
+            <input type="radio" name="role" value="developer"/>
+            <div class="role-icon">⚡</div>
+            <div class="role-name">Developer</div>
+          </label>
+        </div>
+
+        <form id="signup-form" novalidate onsubmit="handleSignup(event)" style="margin-top:0.75rem;">
+          <!-- Name -->
+          <div class="field has-icon">
+            <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <input class="field-input" type="text" id="name" name="name" placeholder="Full name" autocomplete="name" required/>
+            <label class="field-label" for="name">Full name</label>
+          </div>
+
+          <!-- Work email -->
+          <div class="field has-icon" id="field-signup-email">
+            <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <input class="field-input" type="email" id="signup-email" name="email" placeholder="Work email" autocomplete="email" required aria-describedby="signup-email-error"/>
+            <label class="field-label" for="signup-email">Work email</label>
+            <div class="field-error" id="signup-email-error" role="alert">Enter a valid email address</div>
+          </div>
+
+          <!-- New password -->
+          <div class="field has-icon" id="field-new-password">
+            <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input class="field-input" type="password" id="new-password" name="password" placeholder="Password" autocomplete="new-password" required oninput="updateStrength(this.value)" aria-describedby="new-password-error"/>
+            <label class="field-label" for="new-password">Password</label>
+            <button type="button" class="field-action" onclick="togglePwd('new-password', this)" aria-label="Toggle password visibility">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+            <div class="field-error" id="new-password-error" role="alert">Password must be at least 8 characters</div>
+          </div>
+
+          <!-- Strength meter -->
+          <div class="strength-meter" id="strength-meter" aria-label="Password strength">
+            <div class="strength-bar" id="sb1"></div>
+            <div class="strength-bar" id="sb2"></div>
+            <div class="strength-bar" id="sb3"></div>
+            <div class="strength-bar" id="sb4"></div>
+          </div>
+
+          <div style="margin: 0.9rem 0 1.2rem;">
+            <label class="check-label">
+              <input type="checkbox" class="check-input" id="terms-check" required/>
+              <div class="check-box"></div>
+              <span>I agree to the <a href="#" style="color:var(--blue);text-decoration:none;">Terms</a> and <a href="#" style="color:var(--blue);text-decoration:none;">Privacy Policy</a></span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-cta" id="signup-btn">
+            <span class="btn-text">Create workspace account</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="card-footer-text" id="footer-text">
+        Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Create one</a>
+      </div>
+
+      <div class="terms-text">
+        Protected by JWT · <a href="#">Privacy</a> · <a href="#">Security</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCRIPTS ──────────────────────────────────────────────── -->
+<style>
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+</style>
+
+<script>
+/* ──────────────────────────────────────────────────────────── *
+ *  Live code stream animation                                  *
+ * ──────────────────────────────────────────────────────────── */
+const codeLines = [
+  { text: '<span class="c">// Gemini AI Sprint Summary Engine</span>',          type: '' },
+  { text: '<span class="k">import</span> <span class="o">{ GoogleGenerativeAI } </span><span class="k">from</span> <span class="s">\'@google/generative-ai\'</span>', type: '' },
+  { text: '<span class="k">import</span> <span class="o">{ </span><span class="t">Sprint</span><span class="o">, </span><span class="t">Issue</span><span class="o"> } </span><span class="k">from</span> <span class="s">\'../types\'</span>', type: '' },
+  { text: '', type: '' },
+  { text: '<span class="k">const</span> <span class="fn">genAI</span> <span class="o">= </span><span class="k">new</span> <span class="t">GoogleGenerativeAI</span><span class="o">(</span>', type: '' },
+  { text: '&nbsp;&nbsp;<span class="fn">process</span><span class="o">.</span><span class="fn">env</span><span class="o">.</span><span class="vi">GEMINI_API_KEY</span>', type: '' },
+  { text: '<span class="o">)</span>', type: '' },
+  { text: '', type: '' },
+  { text: '<span class="k">export async function</span> <span class="fn">generateSprintSummary</span><span class="o">(</span>', type: '' },
+  { text: '&nbsp;&nbsp;<span class="fn">sprint</span><span class="o">: </span><span class="t">Sprint</span><span class="o">,</span>', type: '' },
+  { text: '&nbsp;&nbsp;<span class="fn">issues</span><span class="o">: </span><span class="t">Issue</span><span class="o">[]</span>', type: 'added' },
+  { text: '<span class="o">): </span><span class="t">Promise</span><span class="o">&lt;</span><span class="t">string</span><span class="o">&gt; {</span>', type: '' },
+  { text: '&nbsp;&nbsp;<span class="k">const</span> <span class="fn">model</span> <span class="o">= </span><span class="fn">genAI</span><span class="o">.</span><span class="fn">getGenerativeModel</span><span class="o">({</span>', type: '' },
+  { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">model</span><span class="o">: </span><span class="s">\'gemini-1.5-pro\'</span>', type: 'active' },
+  { text: '&nbsp;&nbsp;<span class="o">})</span>', type: '' },
+  { text: '', type: '' },
+  { text: '&nbsp;&nbsp;<span class="k">const</span> <span class="fn">prompt</span> <span class="o">= `</span><span class="s">Analyse sprint:</span>', type: '' },
+  { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">${</span><span class="fn">sprint</span><span class="o">.</span><span class="fn">name</span><span class="s">} · ${</span><span class="fn">issues</span><span class="o">.</span><span class="fn">length</span><span class="s">} issues</span>', type: 'added' },
+  { text: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">Completed: ${</span><span class="mt">done</span><span class="s">}/${</span><span class="fn">issues</span><span class="o">.</span><span class="fn">length</span><span class="s">}`</span>', type: '' },
+];
+
+let currentLine = 0;
+let revealInterval;
+const container = document.getElementById('code-stream');
+
+function appendLine(lineData, index) {
+  const div = document.createElement('div');
+  div.className = 'cl ' + lineData.type;
+  div.innerHTML = `<span class="ln">${index + 1}</span><span>${lineData.text}</span>`;
+  container.appendChild(div);
+
+  // Keep last ~16 lines visible
+  const all = container.querySelectorAll('.cl');
+  if (all.length > 17) {
+    all[0].remove();
+    container.querySelectorAll('.cl').forEach((el, i) => {
+      el.querySelector('.ln').textContent = i + 1;
+    });
+  }
+}
+
+function startCodeStream() {
+  // Seed with first batch
+  const initial = codeLines.slice(0, 10);
+  initial.forEach((l, i) => appendLine(l, i));
+  currentLine = 10;
+
+  revealInterval = setInterval(() => {
+    if (currentLine < codeLines.length) {
+      appendLine(codeLines[currentLine], currentLine);
+      currentLine++;
+    } else {
+      // Add blinking cursor on last line
+      clearInterval(revealInterval);
+      const lastCl = container.lastElementChild;
+      if (lastCl) {
+        lastCl.innerHTML += '<span class="cursor-inline"></span>';
+      }
+      // Restart after pause
+      setTimeout(() => {
+        while (container.firstChild) container.removeChild(container.firstChild);
+        currentLine = 0;
+        startCodeStream();
+      }, 3200);
+    }
+  }, 140);
+}
+
+startCodeStream();
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Tab switching                                               *
+ * ──────────────────────────────────────────────────────────── */
+function switchTab(tab) {
+  const isSignin = tab === 'signin';
+
+  document.getElementById('tab-signin').classList.toggle('active', isSignin);
+  document.getElementById('tab-signup').classList.toggle('active', !isSignin);
+  document.getElementById('tab-signin').setAttribute('aria-selected', String(isSignin));
+  document.getElementById('tab-signup').setAttribute('aria-selected', String(!isSignin));
+
+  const signin = document.getElementById('section-signin');
+  const signup = document.getElementById('section-signup');
+
+  if (isSignin) {
+    signup.classList.remove('active');
+    signin.classList.add('active', 'anim-in');
+    document.getElementById('card-title').textContent = 'Welcome back';
+    document.getElementById('card-sub').textContent = 'Sign in to your workspace';
+    document.getElementById('footer-text').innerHTML = 'Don\'t have an account? <a href="#" onclick="switchTab(\'signup\'); return false;">Create one</a>';
+  } else {
+    signin.classList.remove('active');
+    signup.classList.add('active', 'anim-in');
+    document.getElementById('card-title').textContent = 'Create account';
+    document.getElementById('card-sub').textContent = 'Start your engineering workspace';
+    document.getElementById('footer-text').innerHTML = 'Already have an account? <a href="#" onclick="switchTab(\'signin\'); return false;">Sign in</a>';
+  }
+
+  setTimeout(() => {
+    signin.classList.remove('anim-in');
+    signup.classList.remove('anim-in');
+  }, 400);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Password visibility toggle                                  *
+ * ──────────────────────────────────────────────────────────── */
+function togglePwd(fieldId, btn) {
+  const inp = document.getElementById(fieldId);
+  const isHidden = inp.type === 'password';
+  inp.type = isHidden ? 'text' : 'password';
+  btn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+  // Swap icon
+  const svg = btn.querySelector('svg');
+  if (isHidden) {
+    svg.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="1.6"/>`;
+    svg.setAttribute('stroke', 'currentColor');
+  } else {
+    svg.innerHTML = `<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>`;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Password strength meter                                     *
+ * ──────────────────────────────────────────────────────────── */
+function updateStrength(val) {
+  let score = 0;
+  if (val.length >= 8)  score++;
+  if (val.length >= 12) score++;
+  if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+  if (/[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val)) score++;
+
+  const bars = ['sb1','sb2','sb3','sb4'];
+  const cls = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
+
+  bars.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.className = 'strength-bar';
+    if (i < score) el.classList.add(cls);
+  });
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Role selector                                               *
+ * ──────────────────────────────────────────────────────────── */
+function selectRole(el) {
+  document.querySelectorAll('.role-opt').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Form validation helpers                                     *
+ * ──────────────────────────────────────────────────────────── */
+function setError(fieldId, show) {
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+  field.classList.toggle('has-error', show);
+}
+
+function isValidEmail(e) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Sign in handler                                             *
+ * ──────────────────────────────────────────────────────────── */
+function handleSignin(e) {
+  e.preventDefault();
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  let valid = true;
+
+  setError('field-email', !isValidEmail(email));
+  if (!isValidEmail(email)) valid = false;
+
+  setError('field-password', password.length < 1);
+  if (password.length < 1) valid = false;
+
+  if (!valid) return;
+
+  const btn = document.getElementById('signin-btn');
+  btn.classList.add('loading');
+
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    showToast('✓', 'Signed in — redirecting to workspace');
+  }, 1600);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Sign up handler                                             *
+ * ──────────────────────────────────────────────────────────── */
+function handleSignup(e) {
+  e.preventDefault();
+  const email    = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('new-password').value;
+  const terms    = document.getElementById('terms-check').checked;
+  let valid = true;
+
+  setError('field-signup-email', !isValidEmail(email));
+  if (!isValidEmail(email)) valid = false;
+
+  setError('field-new-password', password.length < 8);
+  if (password.length < 8) valid = false;
+
+  if (!terms) {
+    showToast('⚠', 'Accept the Terms to continue');
+    return;
+  }
+
+  if (!valid) return;
+
+  const btn = document.getElementById('signup-btn');
+  btn.classList.add('loading');
+
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    showToast('✓', 'Account created — welcome to CodeForge AI');
+  }, 1800);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  OAuth                                                       *
+ * ──────────────────────────────────────────────────────────── */
+function handleOAuth(provider) {
+  showToast('⬡', `Connecting to ${provider}…`);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Toast                                                       *
+ * ──────────────────────────────────────────────────────────── */
+let toastTimer;
+function showToast(icon, msg) {
+  const toast = document.getElementById('toast');
+  toast.querySelector('.toast-icon').textContent = icon;
+  document.getElementById('toast-msg').textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
+}
+
+/* ──────────────────────────────────────────────────────────── *
+ *  Clear error on input                                        *
+ * ──────────────────────────────────────────────────────────── */
+document.querySelectorAll('.field-input').forEach(inp => {
+  inp.addEventListener('input', () => {
+    const field = inp.closest('.field');
+    if (field && field.classList.contains('has-error')) {
+      field.classList.remove('has-error');
+    }
+  });
+});
+</script>
+</body>
 </html>

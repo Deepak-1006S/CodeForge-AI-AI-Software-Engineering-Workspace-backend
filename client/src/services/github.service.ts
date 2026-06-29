@@ -132,7 +132,7 @@ const mockContributors: GitHubContributor[] = [
 
 export const connectRepo = async (request: ConnectRepoRequest): Promise<GitHubRepository> => {
   try {
-    const response = await api.post<GetRepoDetailsResponse>('/api/github/connect', request);
+    const response = await api.post<GetRepoDetailsResponse>('/github/connect', request);
     return response.data.repository;
   } catch (error) {
     console.error('Failed to connect repository:', error);
@@ -142,7 +142,7 @@ export const connectRepo = async (request: ConnectRepoRequest): Promise<GitHubRe
 
 export const getRepoDetails = async (repoId: string): Promise<GitHubRepository> => {
   try {
-    const response = await api.get<GetRepoDetailsResponse>(`/api/github/repos/${repoId}`);
+    const response = await api.get<GetRepoDetailsResponse>(`/github/projects/${repoId}/repo`);
     return response.data.repository;
   } catch (error) {
     console.error('Failed to fetch repository details:', error);
@@ -152,7 +152,7 @@ export const getRepoDetails = async (repoId: string): Promise<GitHubRepository> 
 
 export const getCommits = async (repoId: string, limit: number = 10): Promise<GitHubCommit[]> => {
   try {
-    const response = await api.get<GetCommitsResponse>(`/api/github/repos/${repoId}/commits`, {
+    const response = await api.get<GetCommitsResponse>(`/github/projects/${repoId}/commits`, {
       params: { limit },
     });
     return response.data.commits;
@@ -166,7 +166,7 @@ export const getPullRequests = async (
   repoId: string
 ): Promise<{ pullRequests: GitHubPullRequest[]; stats: GitHubPullRequestStats }> => {
   try {
-    const response = await api.get<GetPullRequestsResponse>(`/api/github/repos/${repoId}/pull-requests`);
+    const response = await api.get<GetPullRequestsResponse>(`/github/projects/${repoId}/pull-requests`);
     return {
       pullRequests: response.data.pullRequests,
       stats: response.data.stats,
@@ -185,7 +185,7 @@ export const getPullRequests = async (
 
 export const getContributors = async (repoId: string): Promise<GitHubContributor[]> => {
   try {
-    const response = await api.get<GetContributorsResponse>(`/api/github/repos/${repoId}/contributors`);
+    const response = await api.get<GetContributorsResponse>(`/github/projects/${repoId}/contributors`);
     return response.data.contributors;
   } catch (error) {
     console.error('Failed to fetch contributors:', error);

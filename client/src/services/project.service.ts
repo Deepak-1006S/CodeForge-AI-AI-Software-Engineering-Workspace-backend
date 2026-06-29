@@ -27,8 +27,12 @@ export interface ProjectStats {
  * Get all projects
  */
 export const getProjects = async (organizationId?: string, page: number = 1, limit: number = 20): Promise<Project[]> => {
-  const params = { page, limit, ...(organizationId && { orgId: organizationId }) };
-  const response = await apiClient.get('/projects', { params });
+  if (!organizationId) return [];
+
+  const response = await apiClient.get('/projects', {
+    params: { page, limit, orgId: organizationId },
+  });
+
   return response.data.data;
 };
 

@@ -1,6 +1,11 @@
 import { io, Socket } from 'socket.io-client';
 
-const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+const isProduction = import.meta.env.PROD;
+const defaultSocketUrl = isProduction
+  ? 'https://codeforge-ai-ai-software-engineering.onrender.com'
+  : 'http://localhost:5000';
+
+const socketUrl = import.meta.env.VITE_SOCKET_URL || defaultSocketUrl;
 
 let socket: Socket | null = null;
 

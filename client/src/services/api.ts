@@ -1,7 +1,22 @@
 import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 
+const isProduction = import.meta.env.PROD;
+const DEFAULT_API_URL = isProduction
+  ? 'https://codeforge-ai-ai-software-engineering.onrender.com/api'
+  : 'http://localhost:5000/api';
+
 // Get API URL from environment variables
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
+
+const clearAuthStorage = () => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('user');
+};
 
 // Create axios instance with base configuration
 const apiClient: AxiosInstance = axios.create({
@@ -39,15 +54,12 @@ apiClient.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         if (!refreshToken) {
-          // No refresh token available, clear auth and redirect to login
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          window.location.href = '/auth/login';
+          clearAuthStorage();
           return Promise.reject(error);
         }
 
         // Attempt to refresh the token
-        const response = await axios.post(`${API_URL}/auth/refresh-token`, {
+        const response = await apiClient.post('/auth/refresh-token', {
           refreshToken,
         });
 
@@ -63,10 +75,7 @@ apiClient.interceptors.response.use(
         // Retry the original request
         return apiClient(originalRequest);
       } catch (refreshError) {
-        // Refresh failed, redirect to login
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/auth/login';
+        clearAuthStorage();
         return Promise.reject(refreshError);
       }
     }

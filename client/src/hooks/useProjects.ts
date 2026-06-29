@@ -3,17 +3,18 @@ import apiClient from '../services/api';
 import { Project } from '../types/project.types';
 
 export const useProjects = (organizationId?: string, page: number = 1, limit: number = 10): UseQueryResult<Project[], Error> => {
-  const queryParams = new URLSearchParams();
-  if (organizationId) queryParams.append('organizationId', organizationId);
-  queryParams.append('page', page.toString());
-  queryParams.append('limit', limit.toString());
-
   return useQuery<Project[], Error>({
     queryKey: ['projects', organizationId, page, limit],
     queryFn: async () => {
-      const response = await apiClient.get(`/projects?${queryParams}`);
+      if (!organizationId) return [];
+
+      const response = await apiClient.get('/projects', {
+        params: { page, limit, orgId: organizationId },
+      });
+
       return response.data.data as Project[];
     },
+    enabled: !!organizationId,
   });
 };
 

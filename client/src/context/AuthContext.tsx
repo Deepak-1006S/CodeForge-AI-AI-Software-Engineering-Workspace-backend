@@ -22,20 +22,66 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const clearAuthSession = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+    setUser(null);
+    setIsAuthenticated(false);
+    setError(null);
+  };
+
+  const restoreSessionFromStorage = (storedUser: string | null, storedToken: string | null) => {
+    if (!storedToken) {
+      clearAuthSession();
+      return false;
+    }
+
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser) as AuthUser;
+        setUser(parsedUser);
+      } catch {
+        localStorage.removeItem('user');
+      }
+    }
+
+    setIsAuthenticated(true);
+    return true;
+  };
+
+  const persistAuthSession = (userData: AuthUser, accessToken: string, refreshToken: string) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+    setIsAuthenticated(true);
+    setError(null);
+  };
+
   // Initialize auth state from localStorage and verify token
   useEffect(() => {
     const initializeAuth = async () => {
+      const storedToken = localStorage.getItem('accessToken');
+      const storedRefreshToken = localStorage.getItem('refreshToken');
+      const storedUser = localStorage.getItem('user');
+
+      if (!storedToken) {
+        clearAuthSession();
+        setIsLoading(false);
+        return;
+      }
+
+      const restored = restoreSessionFromStorage(storedUser, storedToken);
+
       try {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-          const { user: userData } = await authService.getMe();
-          setUser(userData);
-          setIsAuthenticated(true);
-        }
+        const { user: userData } = await authService.getMe();
+        persistAuthSession(userData, storedToken, storedRefreshToken || '');
       } catch (err) {
         console.error('Auth initialization error:', err);
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        if (!restored) {
+          clearAuthSession();
+        }
       } finally {
         setIsLoading(false);
       }
@@ -49,12 +95,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setError(null);
       const { user: userData, accessToken, refreshToken } = await authService.login(payload);
 
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(userData));
-
-      setUser(userData);
-      setIsAuthenticated(true);
+      persistAuthSession(userData, accessToken, refreshToken);
       toast.success('Logged in successfully');
     } catch (err: any) {
       const errorMsg = err.response?.data?.message || 'Login failed';
@@ -66,23 +107,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const setAuthSession = async (accessToken: string, refreshToken: string) => {
     try {
+      const { user: userData } = await authService.getMe();
+      persistAuthSession(userData, accessToken, refreshToken);
+    } catch (err) {
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-
-      const { user: userData } = await authService.getMe();
-      localStorage.setItem('user', JSON.stringify(userData));
-
-      setUser(userData);
       setIsAuthenticated(true);
-      setError(null);
-    } catch (err) {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
-      setUser(null);
-      setIsAuthenticated(false);
-      setError('Failed to restore authentication session.');
-      throw err;
+      setError('Session restored locally. The profile check will retry in the background.');
     }
   };
 
@@ -90,13 +121,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       setError(null);
       const { user: userData, accessToken, refreshToken } = await authService.register(payload);
-      
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('user', JSON.stringify(userData));
-      
-      setUser(userData);
-      setIsAuthenticated(true);
+
+      persistAuthSession(userData, accessToken, refreshToken);
       toast.success('Account created successfully');
     } catch (err: any) {
       const errorMsg = err.response?.data?.message || 'Registration failed';
@@ -108,8 +134,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     authService.logout();
-    setUser(null);
-    setIsAuthenticated(false);
+    clearAuthSession();
     toast.success('Logged out successfully');
   };
 

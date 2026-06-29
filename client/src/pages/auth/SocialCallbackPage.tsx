@@ -22,7 +22,8 @@ export const SocialCallbackPage: React.FC = () => {
     const restoreSession = async () => {
       try {
         await setAuthSession(accessToken, refreshToken);
-        navigate('/dashboard', { replace: true });
+        const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || '/dashboard';
+        navigate(from, { replace: true });
       } catch (err) {
         setError('Unable to complete social login. Please try again.');
       }

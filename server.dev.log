@@ -1,0 +1,501 @@
+
+> codeforge-ai-server@1.0.0 dev
+> nodemon src/index.ts
+
+[33m[nodemon] 3.1.14[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 15:39:06] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 15:39:07] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 15:39:07] [32minfo[39m: [32m✅ Server running in development mode on port 5000[39m
+[2026-06-23 15:39:07] [32minfo[39m: [32m🔗 API: http://localhost:5000/api[39m
+[2026-06-23 15:39:07] [32minfo[39m: [32m🏥 Health: http://localhost:5000/api/health[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 15:39:55] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 15:39:56] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 15:39:56] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 15:39:56] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 15:39:56] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[0mGET /api/health [32m200[0m 8.252 ms - 113[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 15:41:25] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 15:41:26] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 15:41:26] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 15:41:26] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 15:41:26] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 16:17:22] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 16:17:23] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 16:17:23] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 16:17:23] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 16:17:23] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[0mGET /api/health [32m200[0m 5.162 ms - 113[0m
+[2026-06-23 16:18:09] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:18:09] [33mwarn[39m: [33mEmail not sent to admin161808@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 552.366 ms - 659[0m
+[2026-06-23 16:18:09] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:18:09] [33mwarn[39m: [33mEmail not sent to dev161808@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 532.971 ms - 664[0m
+[2026-06-23 16:18:59] [31merror[39m: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at parse (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\body-parser\lib\types\json.js:92:19)
+    at D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)
+    at invokeCallback (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:238:16)
+    at done (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:508:28)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1729:12) {"url":"/api/auth/register","method":"POST","ip":"::1"}
+[0mPOST /api/auth/register [31m500[0m 14.211 ms - 1086[0m
+[2026-06-23 16:19:15] [31merror[39m: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at parse (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\body-parser\lib\types\json.js:92:19)
+    at D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:228:14)
+    at invokeCallback (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:238:16)
+    at done (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:508:28)
+    at IncomingMessage.emit (node:domain:489:12)
+    at endReadableNT (node:internal/streams/readable:1729:12) {"url":"/api/auth/register","method":"POST","ip":"::1"}
+[0mPOST /api/auth/register [31m500[0m 1.677 ms - 1086[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 16:21:06] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 16:21:07] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 16:21:07] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 16:21:07] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 16:21:07] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[0mGET /api/health [32m200[0m 3.522 ms - 113[0m
+[0mPOST /api/organizations [33m401[0m 29.247 ms - 1487[0m
+[0mPOST /api/organizations [33m401[0m 1.725 ms - 1487[0m
+[0mGET /api/organizations/ [33m401[0m 0.868 ms - 1487[0m
+[0mGET /api/organizations [33m401[0m 0.792 ms - 1487[0m
+[0mPATCH /api/organizations/ [33m401[0m 0.719 ms - 1487[0m
+[0mPOST /api/organizations//invite [33m401[0m 0.994 ms - 1487[0m
+[0mGET /api/organizations//members [33m401[0m 0.807 ms - 1487[0m
+[0mPOST /api/organizations//invite [33m401[0m 1.218 ms - 1487[0m
+[0mPOST /api/projects [33m401[0m 1.448 ms - 1487[0m
+[0mGET /api/projects/11688 [33m401[0m 0.962 ms - 1487[0m
+[0mGET /api/projects?orgId= [33m401[0m 0.801 ms - 1487[0m
+[0mPATCH /api/projects/11688 [33m401[0m 0.773 ms - 1487[0m
+[0mPATCH /api/projects/11688/status [33m401[0m 0.691 ms - 1487[0m
+[0mPATCH /api/projects/11688/status [33m401[0m 0.794 ms - 1487[0m
+[0mPATCH /api/projects/11688/status [33m401[0m 0.619 ms - 1487[0m
+[0mPATCH /api/projects/11688/status [33m401[0m 1.058 ms - 1487[0m
+[0mGET /api/projects/11688/stats [33m401[0m 0.845 ms - 1487[0m
+[0mDELETE /api/projects/11688 [33m401[0m 1.293 ms - 1487[0m
+[0mPATCH /api/projects/11688/status [33m401[0m 1.298 ms - 1487[0m
+[0mPOST /api/issues [33m401[0m 1.199 ms - 1487[0m
+[0mPOST /api/issues [33m401[0m 1.283 ms - 1487[0m
+[0mPOST /api/issues [33m401[0m 1.113 ms - 1487[0m
+[0mPATCH /api/issues//assign [33m401[0m 0.659 ms - 1487[0m
+[0mPATCH /api/issues//status [33m401[0m 0.626 ms - 1487[0m
+[0mPATCH /api/issues//status [33m401[0m 0.965 ms - 1487[0m
+[0mPATCH /api/issues//status [33m401[0m 0.610 ms - 1487[0m
+[0mPATCH /api/issues//status [33m401[0m 0.910 ms - 1487[0m
+[0mPOST /api/issues [33m401[0m 1.133 ms - 1487[0m
+[0mGET /api/issues?projectId=11688&priority=Critical [33m401[0m 1.129 ms - 1487[0m
+[0mGET /api/issues?projectId=11688&status=Done [33m401[0m 0.706 ms - 1487[0m
+[0mGET /api/issues?projectId=11688&search=database [33m401[0m 0.658 ms - 1487[0m
+[0mGET /api/issues/project/11688 [33m401[0m 0.984 ms - 1487[0m
+[0mGET /api/issues//activity [33m401[0m 1.087 ms - 1487[0m
+[0mPATCH /api/issues/ [33m401[0m 0.658 ms - 1487[0m
+[0mDELETE /api/issues/ [33m401[0m 0.636 ms - 1487[0m
+[0mGET /api/issues?projectId=11688 [33m401[0m 0.865 ms - 1487[0m
+[0mGET /api/projects/11688/stats [33m401[0m 0.871 ms - 1487[0m
+[0mDELETE /api/projects/11688 [33m401[0m 0.877 ms - 1487[0m
+[0mGET /api/projects?orgId= [33m401[0m 1.393 ms - 1487[0m
+[2026-06-23 16:24:29] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:24:29] [33mwarn[39m: [33mEmail not sent to admin1782212068419@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 800.289 ms - 666[0m
+[2026-06-23 16:24:30] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:24:30] [33mwarn[39m: [33mEmail not sent to dev1782212068419@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 904.362 ms - 671[0m
+[0mPOST /api/organizations [32m201[0m 301.604 ms - 399[0m
+[2026-06-23 16:24:30] [31merror[39m: MongoServerError: E11000 duplicate key error collection: test.organizations index: name_1_owner_1 dup key: { name: "Acme Engineering", owner: ObjectId('6a3a65e4508ef85971054c5b') }
+    at InsertOneOperation.handleOk (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\insert.ts:79:13)
+    at tryOperation (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\execute_operation.ts:290:26)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\execute_operation.ts:119:12)
+    at async Collection.insertOne (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\collection.ts:294:12) {"url":"/api/organizations","method":"POST","ip":"::1"}
+[0mPOST /api/organizations [31m500[0m 213.655 ms - 1187[0m
+[0mGET /api/organizations/6a3a65e6508ef85971054c61 [32m200[0m 294.771 ms - 479[0m
+[0mGET /api/organizations [32m200[0m 304.422 ms - 392[0m
+[0mPATCH /api/organizations/6a3a65e6508ef85971054c61 [32m200[0m 510.526 ms - 392[0m
+[2026-06-23 16:24:32] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:24:32] [33mwarn[39m: [33mEmail not sent to dev1782212068419@t.com: SMTP not configured[39m
+[0mPOST /api/organizations/6a3a65e6508ef85971054c61/invite [32m201[0m 697.000 ms - 204[0m
+[0mPOST /api/organizations/6a3a65e6508ef85971054c61/invite [33m403[0m 145.488 ms - 350[0m
+[0mGET /api/organizations/6a3a65e6508ef85971054c61/members [32m200[0m 219.926 ms - 468[0m
+[0mGET /api/organizations/6a3a65e6508ef85971054c61 [33m401[0m 1.059 ms - 1487[0m
+[0mPOST /api/projects [32m201[0m 310.028 ms - 584[0m
+[0mGET /api/projects/6a3a65e9508ef85971054c80 [32m200[0m 239.894 ms - 600[0m
+[0mGET /api/projects?orgId=6a3a65e6508ef85971054c61 [32m200[0m 235.950 ms - 671[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80 [32m200[0m 348.861 ms - 587[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80/status [32m200[0m 237.409 ms - 503[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80/status [32m200[0m 284.157 ms - 504[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80/status [32m200[0m 289.430 ms - 506[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80/status [33m400[0m 78.982 ms - 1544[0m
+[0mGET /api/projects/6a3a65e9508ef85971054c80/stats [32m200[0m 339.353 ms - 168[0m
+[0mDELETE /api/projects/6a3a65e9508ef85971054c80 [33m403[0m 201.182 ms - 359[0m
+[0mPOST /api/projects [33m422[0m 102.316 ms - 992[0m
+[0mPATCH /api/projects/6a3a65e9508ef85971054c80/status [32m200[0m 301.997 ms - 503[0m
+[0mPOST /api/issues [32m201[0m 783.561 ms - 479[0m
+[0mPOST /api/issues [32m201[0m 589.149 ms - 500[0m
+[0mPOST /api/issues [32m201[0m 899.876 ms - 445[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad/assign [32m200[0m 682.151 ms - 494[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad/status [32m200[0m 609.788 ms - 422[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad/status [32m200[0m 611.770 ms - 417[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad/status [32m200[0m 582.418 ms - 415[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad/status [33m400[0m 127.549 ms - 1532[0m
+[0mPOST /api/issues [33m422[0m 101.073 ms - 949[0m
+[0mGET /api/issues?projectId=6a3a65e9508ef85971054c80&priority=Critical [32m200[0m 203.557 ms - 507[0m
+[0mGET /api/issues?projectId=6a3a65e9508ef85971054c80&status=Done [32m200[0m 373.299 ms - 580[0m
+[0mGET /api/issues?projectId=6a3a65e9508ef85971054c80&search=database [32m200[0m 230.980 ms - 160[0m
+[0mGET /api/issues/project/6a3a65e9508ef85971054c80 [32m200[0m 303.243 ms - 2264[0m
+[0mGET /api/issues/6a3a65ec508ef85971054cad/activity [32m200[0m 364.644 ms - 1628[0m
+[0mPATCH /api/issues/6a3a65ec508ef85971054cad [32m200[0m 1063.066 ms - 582[0m
+[0mGET /api/issues/6a3a65ec508ef85971054cad [32m200[0m 380.511 ms - 589[0m
+[0mDELETE /api/issues/6a3a65ed508ef85971054cc1 [32m200[0m 608.516 ms - 65[0m
+[0mGET /api/issues?projectId=6a3a65e9508ef85971054c80 [32m200[0m 273.124 ms - 937[0m
+[0mGET /api/projects/6a3a65e9508ef85971054c80/stats [32m200[0m 334.356 ms - 169[0m
+[0mDELETE /api/projects/6a3a65e9508ef85971054c80 [32m200[0m 505.400 ms - 67[0m
+[0mGET /api/projects?orgId=6a3a65e6508ef85971054c61 [32m200[0m 198.138 ms - 164[0m
+[2026-06-23 16:25:10] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:25:10] [33mwarn[39m: [33mEmail not sent to a1782212109769@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 478.205 ms - 658[0m
+[0mPOST /api/organizations [32m201[0m 254.755 ms - 382[0m
+[2026-06-23 16:25:10] [31merror[39m: MongoServerError: E11000 duplicate key error collection: test.organizations index: name_1_owner_1 dup key: { name: "DupTest", owner: ObjectId('6a3a660d508ef85971054d2e') }
+    at InsertOneOperation.handleOk (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\insert.ts:79:13)
+    at tryOperation (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\execute_operation.ts:290:26)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async executeOperation (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\operations\execute_operation.ts:119:12)
+    at async Collection.insertOne (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\mongodb\src\collection.ts:294:12) {"url":"/api/organizations","method":"POST","ip":"::1"}
+[0mPOST /api/organizations [31m500[0m 182.278 ms - 1169[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 16:25:30] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 16:25:31] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 16:25:31] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 16:25:31] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 16:25:31] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 16:26:02] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 16:26:03] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 16:26:03] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 16:26:03] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 16:26:03] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[0mGET /api/health [32m200[0m 3.948 ms - 113[0m
+[2026-06-23 16:26:57] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:26:57] [33mwarn[39m: [33mEmail not sent to admin1782212217089@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 598.812 ms - 666[0m
+[2026-06-23 16:26:58] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:26:58] [33mwarn[39m: [33mEmail not sent to dev1782212217089@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 507.822 ms - 671[0m
+[0mPOST /api/organizations [32m201[0m 299.733 ms - 399[0m
+[0mPOST /api/organizations [33m409[0m 210.629 ms - 1149[0m
+[0mGET /api/organizations/6a3a667aa4725d6fda7c31e0 [32m200[0m 293.901 ms - 479[0m
+[0mGET /api/organizations [32m200[0m 286.647 ms - 392[0m
+[0mPATCH /api/organizations/6a3a667aa4725d6fda7c31e0 [32m200[0m 271.572 ms - 392[0m
+[2026-06-23 16:26:59] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:26:59] [33mwarn[39m: [33mEmail not sent to dev1782212217089@t.com: SMTP not configured[39m
+[0mPOST /api/organizations/6a3a667aa4725d6fda7c31e0/invite [32m201[0m 346.386 ms - 204[0m
+[0mPOST /api/organizations/6a3a667aa4725d6fda7c31e0/invite [33m403[0m 124.308 ms - 350[0m
+[0mGET /api/organizations/6a3a667aa4725d6fda7c31e0/members [32m200[0m 190.903 ms - 468[0m
+[0mGET /api/organizations/6a3a667aa4725d6fda7c31e0 [33m401[0m 3.592 ms - 1487[0m
+[0mPOST /api/projects [32m201[0m 260.526 ms - 584[0m
+[0mGET /api/projects/6a3a667ca4725d6fda7c31ff [32m200[0m 204.499 ms - 600[0m
+[0mGET /api/projects?orgId=6a3a667aa4725d6fda7c31e0 [32m200[0m 191.356 ms - 671[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff [32m200[0m 265.890 ms - 587[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff/status [32m200[0m 265.313 ms - 503[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff/status [32m200[0m 407.320 ms - 504[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff/status [32m200[0m 301.571 ms - 506[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff/status [33m400[0m 98.037 ms - 1544[0m
+[0mGET /api/projects/6a3a667ca4725d6fda7c31ff/stats [32m200[0m 304.547 ms - 168[0m
+[0mDELETE /api/projects/6a3a667ca4725d6fda7c31ff [33m403[0m 402.809 ms - 359[0m
+[0mPOST /api/projects [33m422[0m 99.070 ms - 992[0m
+[0mPATCH /api/projects/6a3a667ca4725d6fda7c31ff/status [32m200[0m 288.065 ms - 503[0m
+[0mPOST /api/issues [32m201[0m 590.614 ms - 479[0m
+[0mPOST /api/issues [32m201[0m 577.988 ms - 500[0m
+[0mPOST /api/issues [32m201[0m 568.665 ms - 445[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c/assign [32m200[0m 653.868 ms - 494[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c/status [32m200[0m 497.990 ms - 422[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c/status [32m200[0m 491.144 ms - 417[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c/status [32m200[0m 507.288 ms - 415[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c/status [33m400[0m 78.711 ms - 1532[0m
+[0mPOST /api/issues [33m422[0m 82.830 ms - 949[0m
+[0mGET /api/issues?projectId=6a3a667ca4725d6fda7c31ff&priority=Critical [32m200[0m 210.761 ms - 507[0m
+[0mGET /api/issues?projectId=6a3a667ca4725d6fda7c31ff&status=Done [32m200[0m 375.771 ms - 580[0m
+[0mGET /api/issues?projectId=6a3a667ca4725d6fda7c31ff&search=database [32m200[0m 228.821 ms - 160[0m
+[0mGET /api/issues/project/6a3a667ca4725d6fda7c31ff [32m200[0m 609.229 ms - 2264[0m
+[0mGET /api/issues/6a3a667fa4725d6fda7c322c/activity [32m200[0m 472.545 ms - 1628[0m
+[0mPATCH /api/issues/6a3a667fa4725d6fda7c322c [32m200[0m 1060.013 ms - 582[0m
+[0mGET /api/issues/6a3a667fa4725d6fda7c322c [32m200[0m 403.732 ms - 589[0m
+[0mDELETE /api/issues/6a3a6680a4725d6fda7c3240 [32m200[0m 610.043 ms - 65[0m
+[0mGET /api/issues?projectId=6a3a667ca4725d6fda7c31ff [32m200[0m 254.762 ms - 937[0m
+[0mGET /api/projects/6a3a667ca4725d6fda7c31ff/stats [32m200[0m 346.922 ms - 169[0m
+[0mDELETE /api/projects/6a3a667ca4725d6fda7c31ff [32m200[0m 304.332 ms - 67[0m
+[0mGET /api/projects?orgId=6a3a667aa4725d6fda7c31e0 [32m200[0m 199.370 ms - 164[0m
+[2026-06-23 16:27:37] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:27:37] [33mwarn[39m: [33mEmail not sent to a1782212256952@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 562.165 ms - 658[0m
+[2026-06-23 16:27:38] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:27:38] [33mwarn[39m: [33mEmail not sent to a21782212256952@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 776.825 ms - 660[0m
+[0mPOST /api/organizations [32m201[0m 248.301 ms - 392[0m
+[0mPOST /api/projects [33m422[0m 89.270 ms - 889[0m
+[2026-06-23 16:27:59] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:27:59] [33mwarn[39m: [33mEmail not sent to a1782212279055@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 586.810 ms - 658[0m
+[0mPOST /api/organizations [32m201[0m 300.120 ms - 392[0m
+[0mPOST /api/projects [33m422[0m 97.389 ms - 889[0m
+[0mPOST /api/issues [33m422[0m 100.433 ms - 952[0m
+[2026-06-23 16:28:00] [31merror[39m: BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+    at new ObjectId (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\mongoose\node_modules\bson\src\objectid.ts:120:15)
+    at getIssues (D:\CodeForge AI — AI Software Engineering Workspace\server\src\controllers\issue.controller.ts:130:14)
+    at D:\CodeForge AI — AI Software Engineering Workspace\server\src\utils\asyncHandler.ts:15:21
+    at Layer.handle [as handle_request] (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\express\lib\router\route.js:149:13)
+    at validate (D:\CodeForge AI — AI Software Engineering Workspace\server\src\middleware\validate.middleware.ts:19:12)
+    at Layer.handle [as handle_request] (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\express\lib\router\route.js:149:13)
+    at middleware (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\express-validator\lib\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5) {"url":"/api/issues?projectId=undefined&search=database","method":"GET","ip":"::1"}
+[0mGET /api/issues?projectId=undefined&search=database [31m500[0m 120.678 ms - 1522[0m
+[2026-06-23 16:29:02] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:29:02] [33mwarn[39m: [33mEmail not sent to a1782212341674@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 729.147 ms - 658[0m
+[0mPOST /api/organizations [32m201[0m 433.214 ms - 392[0m
+[0mPOST /api/projects [32m201[0m 607.514 ms - 548[0m
+[2026-06-23 16:29:25] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:29:25] [33mwarn[39m: [33mEmail not sent to a1782212364725@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 447.593 ms - 658[0m
+[0mPOST /api/organizations [32m201[0m 253.714 ms - 392[0m
+[0mPOST /api/projects [32m201[0m 349.744 ms - 568[0m
+[0mPOST /api/issues [32m201[0m 578.559 ms - 489[0m
+[0mGET /api/issues?projectId=6a3a670da4725d6fda7c32d7&search=database [32m200[0m 163.482 ms - 503[0m
+[2026-06-23 16:30:37] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:30:37] [33mwarn[39m: [33mEmail not sent to admin1782212436902@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 633.496 ms - 666[0m
+[2026-06-23 16:30:38] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:30:38] [33mwarn[39m: [33mEmail not sent to dev1782212436902@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 510.159 ms - 671[0m
+[0mPOST /api/organizations [32m201[0m 401.998 ms - 399[0m
+[0mPOST /api/organizations [33m409[0m 199.737 ms - 1149[0m
+[0mGET /api/organizations/6a3a6756a4725d6fda7c32ef [32m200[0m 305.730 ms - 479[0m
+[0mGET /api/organizations [32m200[0m 300.150 ms - 392[0m
+[0mPATCH /api/organizations/6a3a6756a4725d6fda7c32ef [32m200[0m 408.608 ms - 392[0m
+[2026-06-23 16:30:40] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:30:40] [33mwarn[39m: [33mEmail not sent to dev1782212436902@t.com: SMTP not configured[39m
+[0mPOST /api/organizations/6a3a6756a4725d6fda7c32ef/invite [32m201[0m 921.167 ms - 204[0m
+[0mPOST /api/organizations/6a3a6756a4725d6fda7c32ef/invite [33m403[0m 172.799 ms - 350[0m
+[0mGET /api/organizations/6a3a6756a4725d6fda7c32ef/members [32m200[0m 329.012 ms - 468[0m
+[0mGET /api/organizations/6a3a6756a4725d6fda7c32ef [33m401[0m 0.655 ms - 1487[0m
+[0mPOST /api/projects [32m201[0m 509.312 ms - 584[0m
+[0mGET /api/projects/6a3a6759a4725d6fda7c330e [32m200[0m 391.450 ms - 600[0m
+[0mGET /api/projects?orgId=6a3a6756a4725d6fda7c32ef [32m200[0m 270.311 ms - 671[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e [32m200[0m 748.465 ms - 587[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e/status [32m200[0m 206.032 ms - 503[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e/status [32m200[0m 193.182 ms - 504[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e/status [32m200[0m 192.755 ms - 506[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e/status [33m400[0m 56.956 ms - 1544[0m
+[0mGET /api/projects/6a3a6759a4725d6fda7c330e/stats [32m200[0m 221.409 ms - 168[0m
+[0mDELETE /api/projects/6a3a6759a4725d6fda7c330e [33m403[0m 155.421 ms - 359[0m
+[0mPOST /api/projects [33m422[0m 77.930 ms - 992[0m
+[0mPATCH /api/projects/6a3a6759a4725d6fda7c330e/status [32m200[0m 556.490 ms - 503[0m
+[0mPOST /api/issues [32m201[0m 556.363 ms - 479[0m
+[0mPOST /api/issues [32m201[0m 582.740 ms - 549[0m
+[0mPOST /api/issues [32m201[0m 552.098 ms - 445[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b/assign [32m200[0m 700.232 ms - 494[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b/status [32m200[0m 612.775 ms - 422[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b/status [32m200[0m 610.441 ms - 417[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b/status [32m200[0m 607.900 ms - 415[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b/status [33m400[0m 100.871 ms - 1532[0m
+[0mPOST /api/issues [33m422[0m 181.926 ms - 949[0m
+[0mGET /api/issues?projectId=6a3a6759a4725d6fda7c330e&priority=Critical [32m200[0m 304.535 ms - 556[0m
+[0mGET /api/issues?projectId=6a3a6759a4725d6fda7c330e&status=Done [32m200[0m 264.651 ms - 580[0m
+[0mGET /api/issues?projectId=6a3a6759a4725d6fda7c330e&search=database [32m200[0m 440.901 ms - 556[0m
+[0mGET /api/issues/project/6a3a6759a4725d6fda7c330e [32m200[0m 300.813 ms - 2362[0m
+[0mGET /api/issues/6a3a675ca4725d6fda7c333b/activity [32m200[0m 366.132 ms - 1628[0m
+[0mPATCH /api/issues/6a3a675ca4725d6fda7c333b [32m200[0m 1160.413 ms - 582[0m
+[0mGET /api/issues/6a3a675ca4725d6fda7c333b [33m429[0m 0.729 ms - 635[0m
+[0mDELETE /api/issues/6a3a675ea4725d6fda7c334f [33m429[0m 0.478 ms - 635[0m
+[0mGET /api/issues?projectId=6a3a6759a4725d6fda7c330e [33m429[0m 0.976 ms - 635[0m
+[0mGET /api/projects/6a3a6759a4725d6fda7c330e/stats [33m429[0m 0.483 ms - 635[0m
+[0mDELETE /api/projects/6a3a6759a4725d6fda7c330e [33m429[0m 0.476 ms - 635[0m
+[0mGET /api/projects?orgId=6a3a6756a4725d6fda7c32ef [33m429[0m 0.504 ms - 635[0m
+[0mPOST /api/auth/register [33m429[0m 0.636 ms - 635[0m
+[0mPOST /api/auth/register [33m429[0m 1.365 ms - 635[0m
+[0mPOST /api/organizations [33m429[0m 1.176 ms - 635[0m
+[0mPOST /api/organizations [33m429[0m 0.764 ms - 635[0m
+[0mGET /api/organizations/undefined [33m429[0m 0.698 ms - 635[0m
+[0mGET /api/organizations [33m429[0m 0.521 ms - 635[0m
+[0mPATCH /api/organizations/undefined [33m429[0m 0.636 ms - 635[0m
+[0mPOST /api/organizations/undefined/invite [33m429[0m 0.958 ms - 635[0m
+[0mPOST /api/organizations/undefined/invite [33m429[0m 0.883 ms - 635[0m
+[0mGET /api/organizations/undefined/members [33m429[0m 0.785 ms - 635[0m
+[0mGET /api/organizations/undefined [33m429[0m 0.758 ms - 635[0m
+[0mPOST /api/projects [33m429[0m 0.741 ms - 635[0m
+[0mGET /api/projects/undefined [33m429[0m 0.470 ms - 635[0m
+[0mGET /api/projects?orgId=undefined [33m429[0m 0.559 ms - 635[0m
+[0mPATCH /api/projects/undefined [33m429[0m 0.730 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.710 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.752 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.628 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.588 ms - 635[0m
+[0mGET /api/projects/undefined/stats [33m429[0m 0.802 ms - 635[0m
+[0mDELETE /api/projects/undefined [33m429[0m 0.560 ms - 635[0m
+[0mPOST /api/projects [33m429[0m 1.158 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.703 ms - 635[0m
+[0mPOST /api/issues [33m429[0m 0.709 ms - 635[0m
+[0mPOST /api/issues [33m429[0m 0.725 ms - 635[0m
+[0mPOST /api/issues [33m429[0m 0.929 ms - 635[0m
+[0mPATCH /api/issues/undefined/assign [33m429[0m 0.826 ms - 635[0m
+[0mPATCH /api/issues/undefined/status [33m429[0m 0.695 ms - 635[0m
+[0mPATCH /api/issues/undefined/status [33m429[0m 0.607 ms - 635[0m
+[0mPATCH /api/issues/undefined/status [33m429[0m 0.550 ms - 635[0m
+[0mPATCH /api/issues/undefined/status [33m429[0m 0.750 ms - 635[0m
+[0mPOST /api/issues [33m429[0m 1.129 ms - 635[0m
+[0mGET /api/issues?projectId=undefined&priority=Critical [33m429[0m 0.820 ms - 635[0m
+[0mGET /api/issues?projectId=undefined&status=Done [33m429[0m 0.654 ms - 635[0m
+[0mGET /api/issues?projectId=undefined&search=database [33m429[0m 0.557 ms - 635[0m
+[0mGET /api/issues/project/undefined [33m429[0m 0.631 ms - 635[0m
+[0mGET /api/issues/undefined/activity [33m429[0m 0.754 ms - 635[0m
+[0mPATCH /api/issues/undefined [33m429[0m 0.976 ms - 635[0m
+[0mGET /api/issues/undefined [33m429[0m 0.916 ms - 635[0m
+[0mDELETE /api/issues/undefined [33m429[0m 0.543 ms - 635[0m
+[0mGET /api/issues?projectId=undefined [33m429[0m 0.967 ms - 635[0m
+[0mGET /api/projects/undefined/stats [33m429[0m 0.886 ms - 635[0m
+[0mDELETE /api/projects/undefined [33m429[0m 0.991 ms - 635[0m
+[0mGET /api/projects?orgId=undefined [33m429[0m 1.086 ms - 635[0m
+[0mPOST /api/auth/register [33m429[0m 0.804 ms - 635[0m
+[0mPOST /api/auth/register [33m429[0m 0.923 ms - 635[0m
+[0mPOST /api/organizations [33m429[0m 1.258 ms - 635[0m
+[0mPOST /api/organizations [33m429[0m 0.978 ms - 635[0m
+[0mGET /api/organizations/undefined [33m429[0m 0.666 ms - 635[0m
+[0mGET /api/organizations [33m429[0m 0.840 ms - 635[0m
+[0mPATCH /api/organizations/undefined [33m429[0m 0.878 ms - 635[0m
+[0mPOST /api/organizations/undefined/invite [33m429[0m 0.916 ms - 635[0m
+[0mPOST /api/organizations/undefined/invite [33m429[0m 0.895 ms - 635[0m
+[0mGET /api/organizations/undefined/members [33m429[0m 0.812 ms - 635[0m
+[0mGET /api/organizations/undefined [33m429[0m 0.649 ms - 635[0m
+[0mPOST /api/projects [33m429[0m 1.209 ms - 635[0m
+[0mGET /api/projects/undefined [33m429[0m 0.845 ms - 635[0m
+[0mGET /api/projects?orgId=undefined [33m429[0m 1.193 ms - 635[0m
+[0mPATCH /api/projects/undefined [33m429[0m 1.127 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.841 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 1.137 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 0.885 ms - 635[0m
+[0mPATCH /api/projects/undefined/status [33m429[0m 1.572 ms - 635[0m
+[0mGET /api/projects/undefined/stats [33m429[0m 0.947 ms - 635[0m
+[0mDELETE /api/projects/undefined [33m429[0m 0.861 ms - 635[0m
+[0mPOST /api/projects [33m429[0m 1.261 ms - 635[0m
+[0mGET /api/health [33m429[0m 0.488 ms - 635[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 16:33:10] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 16:33:11] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 16:33:11] [32minfo[39m: [32mServer running in development mode on port 5000[39m
+[2026-06-23 16:33:11] [32minfo[39m: [32mAPI: http://localhost:5000/api[39m
+[2026-06-23 16:33:11] [32minfo[39m: [32mHealth: http://localhost:5000/api/health[39m
+[2026-06-23 16:34:18] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:34:18] [33mwarn[39m: [33mEmail not sent to admin1782212658387@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 548.898 ms - 666[0m
+[2026-06-23 16:34:19] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:34:19] [33mwarn[39m: [33mEmail not sent to dev1782212658387@t.com: SMTP not configured[39m
+[0mPOST /api/auth/register [32m201[0m 604.079 ms - 671[0m
+[0mPOST /api/organizations [32m201[0m 501.419 ms - 399[0m
+[0mPOST /api/organizations [33m409[0m 424.346 ms - 1149[0m
+[0mGET /api/organizations/6a3a68335c26fc7bf450face [32m200[0m 493.544 ms - 479[0m
+[0mGET /api/organizations [32m200[0m 303.923 ms - 392[0m
+[0mPATCH /api/organizations/6a3a68335c26fc7bf450face [32m200[0m 506.206 ms - 392[0m
+[2026-06-23 16:34:22] [33mwarn[39m: [33mSMTP credentials not configured. Email sending is disabled.[39m
+[2026-06-23 16:34:22] [33mwarn[39m: [33mEmail not sent to dev1782212658387@t.com: SMTP not configured[39m
+[0mPOST /api/organizations/6a3a68335c26fc7bf450face/invite [32m201[0m 502.486 ms - 204[0m
+[0mPOST /api/organizations/6a3a68335c26fc7bf450face/invite [33m403[0m 165.294 ms - 350[0m
+[0mGET /api/organizations/6a3a68335c26fc7bf450face/members [32m200[0m 332.907 ms - 468[0m
+[0mGET /api/organizations/6a3a68335c26fc7bf450face [33m401[0m 4.277 ms - 1487[0m
+[0mPOST /api/projects [32m201[0m 500.434 ms - 584[0m
+[0mGET /api/projects/6a3a68375c26fc7bf450faed [32m200[0m 303.145 ms - 600[0m
+[0mGET /api/projects?orgId=6a3a68335c26fc7bf450face [32m200[0m 264.154 ms - 671[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed [32m200[0m 336.903 ms - 587[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed/status [32m200[0m 301.251 ms - 503[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed/status [32m200[0m 301.283 ms - 504[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed/status [32m200[0m 301.364 ms - 506[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed/status [33m400[0m 102.189 ms - 1544[0m
+[0mGET /api/projects/6a3a68375c26fc7bf450faed/stats [32m200[0m 305.089 ms - 168[0m
+[0mDELETE /api/projects/6a3a68375c26fc7bf450faed [33m403[0m 202.410 ms - 359[0m
+[0mPOST /api/projects [33m422[0m 102.766 ms - 992[0m
+[0mPATCH /api/projects/6a3a68375c26fc7bf450faed/status [32m200[0m 405.685 ms - 503[0m
+[0mPOST /api/issues [32m201[0m 814.182 ms - 479[0m
+[0mPOST /api/issues [32m201[0m 812.788 ms - 549[0m
+[0mPOST /api/issues [32m201[0m 1124.818 ms - 445[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a/assign [32m200[0m 813.192 ms - 494[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a/status [32m200[0m 609.340 ms - 422[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a/status [32m200[0m 608.280 ms - 417[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a/status [32m200[0m 592.367 ms - 415[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a/status [33m400[0m 116.859 ms - 1532[0m
+[0mPOST /api/issues [33m422[0m 101.432 ms - 949[0m
+[0mGET /api/issues?projectId=6a3a68375c26fc7bf450faed&priority=Critical [32m200[0m 202.205 ms - 556[0m
+[0mGET /api/issues?projectId=6a3a68375c26fc7bf450faed&status=Done [32m200[0m 276.726 ms - 580[0m
+[0mGET /api/issues?projectId=6a3a68375c26fc7bf450faed&search=database [32m200[0m 222.964 ms - 556[0m
+[0mGET /api/issues/project/6a3a68375c26fc7bf450faed [32m200[0m 302.109 ms - 2362[0m
+[0mGET /api/issues/6a3a683a5c26fc7bf450fb1a/activity [32m200[0m 371.209 ms - 1628[0m
+[0mPATCH /api/issues/6a3a683a5c26fc7bf450fb1a [32m200[0m 1261.787 ms - 582[0m
+[0mGET /api/issues/6a3a683a5c26fc7bf450fb1a [32m200[0m 548.898 ms - 589[0m
+[0mDELETE /api/issues/6a3a683c5c26fc7bf450fb2e [32m200[0m 829.274 ms - 65[0m
+[0mGET /api/issues?projectId=6a3a68375c26fc7bf450faed [32m200[0m 424.601 ms - 986[0m
+[0mGET /api/projects/6a3a68375c26fc7bf450faed/stats [32m200[0m 454.815 ms - 169[0m
+[0mDELETE /api/projects/6a3a68375c26fc7bf450faed [32m200[0m 459.970 ms - 67[0m
+[0mGET /api/projects?orgId=6a3a68335c26fc7bf450face [32m200[0m 295.505 ms - 164[0m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 17:08:37] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 17:08:38] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 17:08:38] [31merror[39m: [31mPort 5000 is already in use. Please stop any other server using this port.[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 17:08:47] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 17:08:48] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 17:08:48] [31merror[39m: [31mPort 5000 is already in use. Please stop any other server using this port.[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 17:10:41] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 17:10:42] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 17:10:42] [31merror[39m: [31mPort 5000 is already in use. Please stop any other server using this port.[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[2026-06-23 17:12:58] [32minfo[39m: [32mSocket.IO initialized[39m
+[2026-06-23 17:12:59] [32minfo[39m: [32mMongoDB connected: ac-bczsdcy-shard-00-00.cendxpe.mongodb.net[39m
+[2026-06-23 17:12:59] [31merror[39m: [31mPort 5000 is already in use. Please stop any other server using this port.[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

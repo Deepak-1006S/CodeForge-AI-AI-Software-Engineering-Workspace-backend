@@ -1,0 +1,36 @@
+D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/controllers/issue.controller.ts(44,17): error TS2739: Type '{ issueId: any; projectId: any; actor: any; action: string; createdAt: Date; }' is missing the following properties from type 'ActivityPayload': id, type, title, message, userId
+
+    at createTSError (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {
+  diagnosticCodes: [ 2739 ]
+}
+D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/controllers/issue.controller.ts(44,17): error TS2739: Type '{ issueId: any; projectId: any; actor: any; action: string; createdAt: Date; }' is missing the following properties from type 'ActivityPayload': id, type, title, message, userId
+
+    at createTSError (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1943:10
+    at Object.require.extensions.<computed> [as .ts] (D:\CodeForge AI — AI Software Engineering Workspace\server\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {
+  diagnosticCodes: [ 2739 ]
+}

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.googleCallback = exports.googleLogin = exports.githubCallback = exports.githubLogin = exports.refreshAccessToken = exports.resetPassword = exports.forgotPassword = exports.updatePassword = exports.getMe = exports.login = exports.register = void 0;
+exports.verifyEmail = exports.resendVerificationEmail = exports.googleCallback = exports.googleLogin = exports.githubCallback = exports.githubLogin = exports.refreshAccessToken = exports.resetPassword = exports.forgotPassword = exports.updatePassword = exports.getMe = exports.login = exports.register = void 0;
 const axios_1 = __importDefault(require("axios"));
 const User_1 = require("../models/User");
 const ApiError_1 = require("../utils/ApiError");
@@ -124,13 +124,23 @@ const register = async (req, res) => {
     if (existingUser) {
         throw new ApiError_1.ApiError(409, 'An account with this email already exists.');
     }
-    const user = await User_1.User.create({ name, email, password, role: role || 'Developer' });
+    const verificationToken = (0, generateToken_1.generateToken)(32);
+    const verificationExpiration = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    const user = await User_1.User.create({
+        name,
+        email,
+        password,
+        role: role || 'Developer',
+        isEmailVerified: false,
+        emailVerificationToken: verificationToken,
+        emailVerificationExpires: verificationExpiration,
+    });
     const accessToken = (0, auth_service_1.generateAccessToken)(user._id.toString(), user.role);
     const refreshToken = (0, auth_service_1.generateRefreshToken)(user._id.toString());
-    // Send welcome email async (don't block response)
     (0, email_service_1.sendWelcome)(user.email, user.name).catch((err) => logger_1.logger.error('Failed to send welcome email:', err));
+    (0, email_service_1.sendVerificationEmail)(user.email, verificationToken).catch((err) => logger_1.logger.error('Failed to send verification email:', err));
     const userResponse = user.toJSON();
-    res.status(201).json(new ApiResponse_1.ApiResponse(201, { user: userResponse, accessToken, refreshToken }, 'Account created successfully'));
+    res.status(201).json(new ApiResponse_1.ApiResponse(201, { user: userResponse, accessToken, refreshToken }, 'Account created successfully. Please verify your email.'));
 };
 exports.register = register;
 const login = async (req, res) => {
@@ -150,6 +160,42 @@ const login = async (req, res) => {
     res.status(200).json(new ApiResponse_1.ApiResponse(200, { user: userResponse, accessToken, refreshToken }, 'Login successful'));
 };
 exports.login = login;
+const verifyEmail = async (req, res) => {
+    const { token } = req.params;
+    const user = await User_1.User.findOne({
+        emailVerificationToken: token,
+        emailVerificationExpires: { $gt: new Date() },
+    }).select('+emailVerificationToken +emailVerificationExpires');
+    if (!user) {
+        throw new ApiError_1.ApiError(400, 'Verification token is invalid or has expired.');
+    }
+    user.isEmailVerified = true;
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    res.status(200).json(new ApiResponse_1.ApiResponse(200, { message: 'Email verified successfully.' }, 'Email verified successfully.'));
+};
+exports.verifyEmail = verifyEmail;
+const resendVerificationEmail = async (req, res) => {
+    const { email } = req.body;
+    const user = await User_1.User.findOne({ email: email.toLowerCase() });
+    if (!user) {
+        res.status(200).json(new ApiResponse_1.ApiResponse(200, {}, 'If an account with that email exists, a verification email has been sent.'));
+        return;
+    }
+    if (user.isEmailVerified) {
+        res.status(200).json(new ApiResponse_1.ApiResponse(200, {}, 'Email is already verified.'));
+        return;
+    }
+    const verificationToken = (0, generateToken_1.generateToken)(32);
+    const verificationExpiration = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    user.emailVerificationToken = verificationToken;
+    user.emailVerificationExpires = verificationExpiration;
+    await user.save({ validateBeforeSave: false });
+    await (0, email_service_1.sendVerificationEmail)(user.email, verificationToken);
+    res.status(200).json(new ApiResponse_1.ApiResponse(200, {}, 'If an account with that email exists, a verification email has been sent.'));
+};
+exports.resendVerificationEmail = resendVerificationEmail;
 const getMe = async (req, res) => {
     const user = await User_1.User.findById(req.user._id).select('-password');
     if (!user) {

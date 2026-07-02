@@ -35,7 +35,7 @@ export const LoginPage: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       setIsSubmitting(true);
-      await login({ email: data.email, password: data.password });
+      await login({ email: data.email, password: data.password, rememberMe: data.rememberMe });
       toast.success('Signed in successfully!');
       navigate('/dashboard');
     } catch (error: any) {

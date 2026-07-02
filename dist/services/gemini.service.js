@@ -24,6 +24,12 @@ const getModel = () => {
     }
     return model;
 };
+const generateChatStream = async (history, message) => {
+    const geminiModel = getModel();
+    const chatSession = geminiModel.startChat({ history });
+    return chatSession.sendMessageStream(message);
+};
+exports.generateChatStream = generateChatStream;
 const callGemini = async (prompt) => {
     try {
         const geminiModel = getModel();

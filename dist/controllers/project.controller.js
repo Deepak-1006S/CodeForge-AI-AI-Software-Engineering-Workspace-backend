@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeTeamMember = exports.addTeamMember = exports.getProjectStats = exports.updateStatus = exports.deleteProject = exports.updateProject = exports.getProjectById = exports.getProjects = exports.createProject = void 0;
+exports.removeTeamMember = exports.addTeamMember = exports.getProjectStats = exports.updateStatus = exports.deleteProject = exports.duplicateProject = exports.updateArchive = exports.updatePin = exports.updateFavorite = exports.updateProject = exports.getProjectById = exports.getProjects = exports.createProject = void 0;
 const mongoose_1 = require("mongoose");
 const Project_1 = require("../models/Project");
 const Issue_1 = require("../models/Issue");
@@ -37,13 +37,14 @@ const createProject = async (req, res) => {
 exports.createProject = createProject;
 const getProjects = async (req, res) => {
     const { page, limit, skip } = (0, pagination_1.parsePagination)(req);
-    const { orgId, status, search } = req.query;
+    const { orgId, status, search, sortBy, sortOrder } = req.query;
     if (!orgId) {
         throw new ApiError_1.ApiError(400, 'Organization ID is required.');
     }
     const filter = {
         organization: new mongoose_1.Types.ObjectId(orgId),
         deletedAt: null,
+        archivedAt: null,
     };
     if (status)
         filter.status = status;
@@ -53,13 +54,22 @@ const getProjects = async (req, res) => {
             { description: { $regex: search, $options: 'i' } },
         ];
     }
+    const allowedSortFields = ['createdAt', 'title', 'favorite', 'pinned'];
+    const sortField = typeof sortBy === 'string' && allowedSortFields.includes(sortBy) ? sortBy : 'createdAt';
+    const sortDirection = sortOrder === 'asc' ? 1 : -1;
+    const sort = {
+        [sortField]: sortDirection,
+    };
+    if (sortField !== 'createdAt') {
+        sort.createdAt = -1;
+    }
     const [projects, total] = await Promise.all([
         Project_1.Project.find(filter)
             .populate('owner', 'name email avatar')
             .populate('team', 'name email avatar')
             .skip(skip)
             .limit(limit)
-            .sort({ createdAt: -1 })
+            .sort(sort)
             .lean(),
         Project_1.Project.countDocuments(filter),
     ]);
@@ -101,6 +111,93 @@ const updateProject = async (req, res) => {
     res.status(200).json(new ApiResponse_1.ApiResponse(200, { project }, 'Project updated successfully'));
 };
 exports.updateProject = updateProject;
+const updateFavorite = async (req, res) => {
+    const { favorite } = req.body;
+    if (typeof favorite !== 'boolean') {
+        throw new ApiError_1.ApiError(400, 'Favorite flag is required and must be a boolean.');
+    }
+    const project = await Project_1.Project.findById(req.params.id);
+    if (!project) {
+        throw new ApiError_1.ApiError(404, 'Project not found.');
+    }
+    const isOwner = project.owner.toString() === req.user._id.toString();
+    if (!isOwner && req.user.role === 'Developer') {
+        throw new ApiError_1.ApiError(403, 'Only project owners and managers can update favorites.');
+    }
+    project.favorite = favorite;
+    await project.save();
+    await project.populate([
+        { path: 'owner', select: 'name email avatar' },
+        { path: 'team', select: 'name email avatar' },
+    ]);
+    res.status(200).json(new ApiResponse_1.ApiResponse(200, { project }, 'Project favorite status updated'));
+};
+exports.updateFavorite = updateFavorite;
+const updatePin = async (req, res) => {
+    const { pinned } = req.body;
+    if (typeof pinned !== 'boolean') {
+        throw new ApiError_1.ApiError(400, 'Pinned flag is required and must be a boolean.');
+    }
+    const project = await Project_1.Project.findById(req.params.id);
+    if (!project) {
+        throw new ApiError_1.ApiError(404, 'Project not found.');
+    }
+    const isOwner = project.owner.toString() === req.user._id.toString();
+    if (!isOwner && req.user.role === 'Developer') {
+        throw new ApiError_1.ApiError(403, 'Only project owners and managers can update pin status.');
+    }
+    project.pinned = pinned;
+    await project.save();
+    await project.populate([
+        { path: 'owner', select: 'name email avatar' },
+        { path: 'team', select: 'name email avatar' },
+    ]);
+    res.status(200).json(new ApiResponse_1.ApiResponse(200, { project }, 'Project pin status updated'));
+};
+exports.updatePin = updatePin;
+const updateArchive = async (req, res) => {
+    const { archived } = req.body;
+    if (typeof archived !== 'boolean') {
+        throw new ApiError_1.ApiError(400, 'Archive flag is required and must be a boolean.');
+    }
+    const project = await Project_1.Project.findById(req.params.id);
+    if (!project) {
+        throw new ApiError_1.ApiError(404, 'Project not found.');
+    }
+    if (project.owner.toString() !== req.user._id.toString() && req.user.role !== 'Admin') {
+        throw new ApiError_1.ApiError(403, 'Only project owners or admins can archive projects.');
+    }
+    project.archivedAt = archived ? new Date() : null;
+    await project.save();
+    await project.populate([
+        { path: 'owner', select: 'name email avatar' },
+        { path: 'team', select: 'name email avatar' },
+    ]);
+    res.status(200).json(new ApiResponse_1.ApiResponse(200, { project }, archived ? 'Project archived' : 'Project restored'));
+};
+exports.updateArchive = updateArchive;
+const duplicateProject = async (req, res) => {
+    const project = await Project_1.Project.findById(req.params.id);
+    if (!project) {
+        throw new ApiError_1.ApiError(404, 'Project not found.');
+    }
+    const duplicated = await Project_1.Project.create({
+        title: `${project.title} Copy`,
+        description: project.description,
+        organization: project.organization,
+        owner: req.user._id,
+        status: project.status,
+        team: [req.user._id],
+        githubOwner: project.githubOwner,
+        githubRepo: project.githubRepo,
+    });
+    await duplicated.populate([
+        { path: 'owner', select: 'name email avatar' },
+        { path: 'team', select: 'name email avatar' },
+    ]);
+    res.status(201).json(new ApiResponse_1.ApiResponse(201, { project: duplicated }, 'Project duplicated successfully'));
+};
+exports.duplicateProject = duplicateProject;
 const deleteProject = async (req, res) => {
     const project = await Project_1.Project.findById(req.params.id);
     if (!project) {

@@ -19,6 +19,10 @@ router.get('/github/callback', (0, asyncHandler_1.asyncHandler)(auth_controller_
 router.get('/google/login', (0, asyncHandler_1.asyncHandler)(auth_controller_1.googleLogin));
 // GET /api/auth/google/callback
 router.get('/google/callback', (0, asyncHandler_1.asyncHandler)(auth_controller_1.googleCallback));
+// GET /api/auth/verify/:token
+router.get('/verify/:token', (0, asyncHandler_1.asyncHandler)(auth_controller_1.verifyEmail));
+// POST /api/auth/resend-verification
+router.post('/resend-verification', (0, asyncHandler_1.asyncHandler)(auth_controller_1.resendVerificationEmail));
 // GET /api/auth/me
 router.get('/me', auth_middleware_1.authenticate, (0, asyncHandler_1.asyncHandler)(auth_controller_1.getMe));
 // PUT /api/auth/password

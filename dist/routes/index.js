@@ -12,7 +12,9 @@ const issue_routes_1 = __importDefault(require("./issue.routes"));
 const dashboard_routes_1 = __importDefault(require("./dashboard.routes"));
 const github_routes_1 = __importDefault(require("./github.routes"));
 const ai_routes_1 = __importDefault(require("./ai.routes"));
+const chat_routes_1 = __importDefault(require("./chat.routes"));
 const notification_routes_1 = __importDefault(require("./notification.routes"));
+const workspace_routes_1 = __importDefault(require("./workspace.routes"));
 const router = (0, express_1.Router)();
 // Health check
 router.get('/health', (_req, res) => {
@@ -32,5 +34,7 @@ router.use('/issues', issue_routes_1.default);
 router.use('/dashboard', dashboard_routes_1.default);
 router.use('/github', github_routes_1.default);
 router.use('/ai', ai_routes_1.default);
+router.use('/chats', chat_routes_1.default);
 router.use('/notifications', notification_routes_1.default);
+router.use('/workspace', workspace_routes_1.default);
 exports.default = router;

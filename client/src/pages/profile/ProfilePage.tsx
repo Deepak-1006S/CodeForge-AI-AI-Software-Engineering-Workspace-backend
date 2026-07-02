@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAuth } from '../../hooks/useAuth';
+import * as authService from '../../services/auth.service';
+import * as userService from '../../services/user.service';
 import { User, Mail, Lock, Save } from 'lucide-react';
 import Avatar from '../../components/ui/Avatar';
 import Input from '../../components/ui/Input';
@@ -31,7 +33,7 @@ type ProfileFormData = z.infer<typeof profileSchema>;
 type PasswordFormData = z.infer<typeof passwordSchema>;
 
 export const ProfilePage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const [isUpdating, setIsUpdating] = useState(false);
 
   const profileForm = useForm<ProfileFormData>({
@@ -46,11 +48,18 @@ export const ProfilePage: React.FC = () => {
     resolver: zodResolver(passwordSchema),
   });
 
+  useEffect(() => {
+    profileForm.reset({
+      name: user?.name || '',
+      email: user?.email || '',
+    });
+  }, [user, profileForm]);
+
   const onProfileSubmit = async (data: ProfileFormData) => {
     setIsUpdating(true);
     try {
-      // Call update profile API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await userService.updateUserProfile({ name: data.name });
+      await refreshUser();
       toast.success('Profile updated successfully');
     } catch (error) {
       toast.error('Failed to update profile');
@@ -62,8 +71,10 @@ export const ProfilePage: React.FC = () => {
   const onPasswordSubmit = async (data: PasswordFormData) => {
     setIsUpdating(true);
     try {
-      // Call update password API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await authService.updatePassword({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      });
       toast.success('Password updated successfully');
       passwordForm.reset();
     } catch (error) {

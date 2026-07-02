@@ -162,7 +162,7 @@ export const PremiumLoginPage: React.FC = () => {
 
     try {
       setIsSubmitting(true);
-      await login({ email: signinData.email, password: signinData.password });
+      await login({ email: signinData.email, password: signinData.password, rememberMe: signinData.rememberMe });
       toast.success('Signed in successfully');
       const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || '/dashboard';
       window.location.assign(from);

@@ -17,6 +17,14 @@ router.post('/', project_validator_1.createProjectValidator, validate_middleware
 router.get('/:id', (0, asyncHandler_1.asyncHandler)(project_controller_1.getProjectById));
 // PATCH /api/projects/:id
 router.patch('/:id', project_validator_1.updateProjectValidator, validate_middleware_1.validate, (0, asyncHandler_1.asyncHandler)(project_controller_1.updateProject));
+// PATCH /api/projects/:id/favorite
+router.patch('/:id/favorite', project_validator_1.toggleProjectFavoriteValidator, validate_middleware_1.validate, (0, asyncHandler_1.asyncHandler)(project_controller_1.updateFavorite));
+// PATCH /api/projects/:id/pin
+router.patch('/:id/pin', project_validator_1.toggleProjectPinValidator, validate_middleware_1.validate, (0, asyncHandler_1.asyncHandler)(project_controller_1.updatePin));
+// PATCH /api/projects/:id/archive
+router.patch('/:id/archive', project_validator_1.toggleProjectArchiveValidator, validate_middleware_1.validate, (0, asyncHandler_1.asyncHandler)(project_controller_1.updateArchive));
+// POST /api/projects/:id/duplicate
+router.post('/:id/duplicate', (0, asyncHandler_1.asyncHandler)(project_controller_1.duplicateProject));
 // DELETE /api/projects/:id
 router.delete('/:id', (0, asyncHandler_1.asyncHandler)(project_controller_1.deleteProject));
 // PATCH /api/projects/:id/status

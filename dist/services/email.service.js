@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendWelcome = exports.sendInvitation = exports.sendPasswordReset = void 0;
+exports.sendWelcome = exports.sendInvitation = exports.sendPasswordReset = exports.sendVerificationEmail = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const env_1 = require("../config/env");
 const logger_1 = require("../config/logger");
@@ -48,6 +48,26 @@ const sendEmail = async (options) => {
         return false;
     }
 };
+const sendVerificationEmail = async (email, token) => {
+    const verificationUrl = `${env_1.env.clientUrl}/auth/verify/${token}`;
+    return sendEmail({
+        to: email,
+        subject: 'Verify your CodeForge AI email address',
+        text: `Please verify your email by visiting this link: ${verificationUrl}`,
+        html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #4F46E5;">Verify Your Email</h2>
+        <p>Thanks for signing up for CodeForge AI. Please verify your email address to activate your account.</p>
+        <a href="${verificationUrl}" style="display: inline-block; background-color: #4F46E5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">
+          Verify Email
+        </a>
+        <p>Or copy this link into your browser:</p>
+        <p style="word-break: break-all; color: #6366F1;">${verificationUrl}</p>
+      </div>
+    `,
+    });
+};
+exports.sendVerificationEmail = sendVerificationEmail;
 const sendPasswordReset = async (email, token) => {
     const resetUrl = `${env_1.env.clientUrl}/reset-password?token=${token}`;
     return sendEmail({

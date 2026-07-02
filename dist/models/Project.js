@@ -70,6 +70,18 @@ const ProjectSchema = new mongoose_1.Schema({
             ref: 'User',
         },
     ],
+    favorite: {
+        type: Boolean,
+        default: false,
+    },
+    pinned: {
+        type: Boolean,
+        default: false,
+    },
+    archivedAt: {
+        type: Date,
+        default: null,
+    },
     githubOwner: {
         type: String,
         default: null,
